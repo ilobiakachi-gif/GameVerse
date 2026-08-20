@@ -1,1 +1,0 @@
-Demigod Gaming redesign: polished responsive homepage, game discovery, guide search/filtering, favorites, theme toggle, guide modals, and improved navigation.
