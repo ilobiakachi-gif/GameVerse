@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>GameVerse | Gaming Dashboard</title>
+<style>
+:root{--bg:#070707;--panel:#111;--panel2:#171717;--red:#ff2020;--red2:#ff4d4d;--text:#fff;--muted:#a7a7a7;--line:#2a1010;--good:#59e391}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:Arial,Helvetica,sans-serif;background:radial-gradient(circle at 20% 0%,rgba(255,32,32,.16),transparent 35%),radial-gradient(circle at 100% 20%,rgba(255,0,0,.08),transparent 30%),var(--bg);color:var(--text);min-height:100vh}button,input{font:inherit}a{color:inherit;text-decoration:none}
+.top{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;align-items:center;padding:16px 6%;background:rgba(7,7,7,.9);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}.brand{font-size:25px;font-weight:900;letter-spacing:.5px}.brand span{color:var(--red)}.back{padding:10px 15px;border:1px solid #442020;border-radius:10px;color:#ddd}.back:hover{border-color:var(--red);color:#fff}
+main{width:min(1250px,92%);margin:auto;padding:34px 0 70px}.hero{display:grid;grid-template-columns:1.3fr .7fr;gap:24px;align-items:stretch}.hero-card,.side-card,.panel{background:linear-gradient(145deg,#151515,#0e0e0e);border:1px solid #261212;border-radius:22px;box-shadow:0 18px 55px rgba(0,0,0,.28)}.hero-card{padding:34px;position:relative;overflow:hidden}.hero-card:after{content:"";position:absolute;width:240px;height:240px;border-radius:50%;right:-80px;top:-90px;background:radial-gradient(circle,rgba(255,32,32,.28),transparent 65%)}.eyebrow{display:inline-flex;gap:8px;align-items:center;padding:8px 12px;border-radius:999px;border:1px solid #4c1818;color:#ff9898;font-size:12px;font-weight:800;letter-spacing:1px}.hero h1{font-size:clamp(42px,7vw,76px);line-height:.95;margin:20px 0 16px;max-width:700px}.hero h1 span{color:var(--red)}.hero p{color:var(--muted);line-height:1.7;max-width:700px}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}.btn{border:0;border-radius:12px;padding:13px 18px;font-weight:800;cursor:pointer}.btn-red{background:var(--red);color:#fff;box-shadow:0 10px 25px rgba(255,32,32,.2)}.btn-dark{background:#1a1a1a;color:#fff;border:1px solid #333}.btn:hover{transform:translateY(-2px)}
+.side-card{padding:24px;display:flex;flex-direction:column;justify-content:space-between}.mini-label{color:#888;font-size:12px;text-transform:uppercase;letter-spacing:1.5px}.big-score{font-size:60px;font-weight:900;color:var(--red);margin:8px 0}.score-sub{color:#bbb}.rank{margin-top:20px;padding:14px;border-radius:14px;background:#171717;border:1px solid #262626}.rank strong{display:block;font-size:22px;margin-top:5px}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:15px;margin:30px 0 14px}.section-head h2{font-size:28px}.section-head p{color:#888}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.stat{padding:20px;border-radius:18px;background:var(--panel);border:1px solid #242424}.stat .icon{font-size:24px}.stat b{font-size:30px;display:block;margin:8px 0 4px}.stat small{color:#888}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 16px}.chip{border:1px solid #2d2d2d;background:#111;color:#bbb;padding:9px 13px;border-radius:999px;cursor:pointer}.chip.active,.chip:hover{border-color:var(--red);background:#261010;color:#fff}.search{flex:1;min-width:230px;padding:12px 15px;border-radius:12px;border:1px solid #2a2a2a;background:#0f0f0f;color:#fff;outline:none}.search:focus{border-color:var(--red)}
+.games{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.game{background:var(--panel);border:1px solid #262626;border-radius:18px;overflow:hidden;transition:.25s}.game:hover{transform:translateY(-5px);border-color:#5b1d1d}.cover{height:145px;display:flex;align-items:center;justify-content:center;font-size:60px;background:linear-gradient(135deg,#260909,#151515)}.cover.blue{background:linear-gradient(135deg,#08182a,#151515)}.cover.gold{background:linear-gradient(135deg,#2b2207,#151515)}.cover.green{background:linear-gradient(135deg,#092316,#151515)}.game-info{padding:17px}.tag{display:inline-block;font-size:11px;color:#ff9b9b;border:1px solid #4c1919;padding:5px 8px;border-radius:999px}.game h3{margin:10px 0 6px}.game p{color:#8f8f8f;font-size:13px;line-height:1.5;min-height:40px}.game-foot{display:flex;justify-content:space-between;align-items:center;margin-top:14px}.rating{color:#ffd75e;font-weight:800}.small-btn{padding:8px 11px;border-radius:9px;border:1px solid #3b2020;background:#171717;color:#fff;cursor:pointer}.small-btn:hover{background:#2a1010;border-color:var(--red)}
+.panels{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}.panel{padding:22px}.panel h3{margin-bottom:14px}.news{display:grid;gap:10px}.news-item{padding:14px;border-radius:14px;background:#161616;border-left:3px solid var(--red)}.news-item strong{display:block}.news-item span{display:block;color:#818181;font-size:12px;margin-top:5px}.ach{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.badge{padding:16px;background:#151515;border:1px solid #2a2a2a;border-radius:14px;text-align:center}.badge .emoji{font-size:30px}.badge.locked{opacity:.38;filter:grayscale(1)}.badge p{font-size:12px;color:#898989;margin-top:5px}
+.random{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;padding:20px;border-radius:18px;background:linear-gradient(100deg,#210808,#111);border:1px solid #4b1515}.random h3{font-size:26px}.random p{color:#999;margin-top:5px}.random-game{font-size:50px;min-width:90px;text-align:center}
+footer{text-align:center;color:#666;padding:30px;border-top:1px solid #1b1b1b;margin-top:30px}
+.toast{position:fixed;left:50%;bottom:25px;transform:translate(-50%,20px);background:#191919;border:1px solid #3c1717;border-radius:12px;padding:12px 16px;opacity:0;pointer-events:none;transition:.25s;z-index:20}.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:980px){.hero,.panels{grid-template-columns:1fr}.games{grid-template-columns:repeat(2,1fr)}.stats{grid-template-columns:repeat(2,1fr)}}@media(max-width:600px){.games{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.top{padding:14px 4%}.hero-card{padding:25px}.ach{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<header class="top"><a class="brand" href="index.html">Game<span>Verse</span></a><a class="back" href="index.html">← Main Site</a></header>
+<main>
+<section class="hero">
+  <div class="hero-card">
+    <div class="eyebrow">🔥 GAMER CONTROL CENTER</div>
+    <h1>YOUR <span>GAMEVERSE</span> DASHBOARD</h1>
+    <p>Track your gaming progress, discover what's trending, jump into a random game and keep your favorite titles close.</p>
+    <div class="actions"><button class="btn btn-red" onclick="randomGame()">🎲 Pick a Game</button><a class="btn btn-dark" href="index.html#games">🎮 Explore Games</a></div>
+  </div>
+  <div class="side-card"><div><div class="mini-label">Current Level</div><div class="big-score" id="level">1</div><div class="score-sub" id="xp">0 / 100 XP</div></div><div class="rank"><span class="mini-label">Rank</span><strong id="rank">Rookie</strong></div></div>
+</section>
+
+<div class="section-head"><div><h2>Player Stats</h2><p>Your progress is saved in this browser.</p></div></div>
+<section class="stats">
+  <div class="stat"><div class="icon">⭐</div><b id="favStat">0</b><small>Favorites</small></div>
+  <div class="stat"><div class="icon">🏆</div><b id="achStat">0</b><small>Achievements</small></div>
+  <div class="stat"><div class="icon">🔎</div><b id="viewStat">0</b><small>Games Explored</small></div>
+  <div class="stat"><div class="icon">🔥</div><b id="streakStat">1</b><small>Day Streak</small></div>
+</section>
+
+<div class="section-head"><div><h2>Trending Now</h2><p>Jump into a category or search for a game.</p></div></div>
+<div class="toolbar"><input class="search" id="search" placeholder="Search dashboard games..." oninput="renderGames()"><button class="chip active" data-cat="All">All</button><button class="chip" data-cat="Action">Action</button><button class="chip" data-cat="Racing">Racing</button><button class="chip" data-cat="Sports">Sports</button><button class="chip" data-cat="Adventure">Adventure</button></div>
+<section class="games" id="games"></section>
+
+<div class="section-head"><div><h2>Game of the Day</h2><p>A quick recommendation picked for you.</p></div></div>
+<section class="random"><div><h3 id="dayTitle">Cyber Arena</h3><p id="dayText">Fast competitive matches, tight movement and team strategy.</p></div><div class="random-game" id="dayIcon">⚡</div></section>
+
+<section class="panels">
+<div class="panel"><h3>📰 Gaming Feed</h3><div class="news"><div class="news-item"><strong>Fresh content drops are here</strong><span>New games, updates and community highlights.</span></div><div class="news-item"><strong>Competitive season is heating up</strong><span>Build your squad and chase the top rank.</span></div><div class="news-item"><strong>Mobile gaming keeps growing</strong><span>More players. More matches. More GameVerse.</span></div></div></div>
+<div class="panel"><h3>🏆 Achievement Wall</h3><div class="ach"><div class="badge" id="achExplorer"><div class="emoji">🔍</div><strong>Explorer</strong><p>Open a game</p></div><div class="badge locked" id="achCollector"><div class="emoji">⭐</div><strong>Collector</strong><p>Favorite a game</p></div><div class="badge locked" id="achVeteran"><div class="emoji">🔥</div><strong>Veteran</strong><p>Explore 5 games</p></div></div></div>
+</section>
+</main>
+<footer>GameVerse 🎮 — Games · News · Reviews · Community</footer><div class="toast" id="toast"></div>
+<script>
+const games=[
+{name:'Cyber Arena',cat:'Action',icon:'⚡',rating:9.6,desc:'Fast competitive matches built around movement and strategy.'},
+{name:'Shadow Ops',cat:'Action',icon:'🎯',rating:9.3,desc:'Tactical missions, sharp reactions and high-pressure action.'},
+{name:'Turbo Rush',cat:'Racing',icon:'🏎️',rating:9.1,desc:'Race through dangerous tracks and push for the fastest time.'},
+{name:'Goal Masters',cat:'Sports',icon:'⚽',rating:9.0,desc:'Build your squad, control the match and chase trophies.'},
+{name:'Dragon Quest',cat:'Adventure',icon:'🐉',rating:8.9,desc:'Explore mysterious worlds and unlock new challenges.'},
+{name:'Neon Strike',cat:'Action',icon:'🔴',rating:8.8,desc:'Arcade-style battles with quick rounds and big moments.'},
+{name:'Street Velocity',cat:'Racing',icon:'🚘',rating:8.7,desc:'Night races, tight corners and pure speed.'},
+{name:'Battle Legends',cat:'Adventure',icon:'🛡️',rating:8.6,desc:'Discover a fantasy world and build your own legend.'}
+];
+let state=JSON.parse(localStorage.getItem('gameverseDashboard'))||{xp:0,favorites:[],explored:[],achievements:['explorer'],streak:1};
+let category='All';
+const save=()=>localStorage.setItem('gameverseDashboard',JSON.stringify(state));
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1800)}
+function addXP(n){state.xp+=n;save();renderStats()}
+function explore(name){if(!state.explored.includes(name)){state.explored.push(name);addXP(10);toast('Explored '+name+' +10 XP');}if(state.explored.length>=5&&!state.achievements.includes('veteran')){state.achievements.push('veteran');addXP(25);toast('Achievement unlocked: Veteran 🔥')}if(!state.achievements.includes('explorer')){state.achievements.push('explorer')}save();renderStats();renderAchievements()}
+function favorite(name){if(!state.favorites.includes(name)){state.favorites.push(name);addXP(15);if(!state.achievements.includes('collector')){state.achievements.push('collector');addXP(25)}toast('Added to favorites ⭐');save();renderStats();renderAchievements()}else toast('Already in favorites')}
+function renderStats(){const lvl=Math.floor(state.xp/100)+1;const cur=state.xp%100;document.getElementById('level').textContent=lvl;document.getElementById('xp').textContent=cur+' / 100 XP';document.getElementById('favStat').textContent=state.favorites.length;document.getElementById('achStat').textContent=state.achievements.length;document.getElementById('viewStat').textContent=state.explored.length;document.getElementById('streakStat').textContent=state.streak;document.getElementById('rank').textContent=lvl>=10?'Legend':lvl>=5?'Elite':lvl>=3?'Pro':'Rookie'}
+function renderAchievements(){document.getElementById('achCollector').classList.toggle('locked',!state.achievements.includes('collector'));document.getElementById('achVeteran').classList.toggle('locked',!state.achievements.includes('veteran'));}
+function renderGames(){const q=document.getElementById('search').value.toLowerCase();const wrap=document.getElementById('games');wrap.innerHTML='';games.filter(g=>(category==='All'||g.cat===category)&&g.name.toLowerCase().includes(q)).forEach(g=>{const el=document.createElement('article');el.className='game';el.innerHTML=`<div class="cover">${g.icon}</div><div class="game-info"><span class="tag">${g.cat}</span><h3>${g.name}</h3><p>${g.desc}</p><div class="game-foot"><span class="rating">★ ${g.rating}</span><span><button class="small-btn" data-action="explore">Open</button> <button class="small-btn" data-action="favorite">☆</button></span></div></div>`;el.querySelector('[data-action="explore"]').onclick=()=>{explore(g.name);document.getElementById('dayTitle').textContent=g.name;document.getElementById('dayText').textContent=g.desc;document.getElementById('dayIcon').textContent=g.icon};el.querySelector('[data-action="favorite"]').onclick=()=>favorite(g.name);wrap.appendChild(el)})}
+function randomGame(){const g=games[Math.floor(Math.random()*games.length)];explore(g.name);document.getElementById('dayTitle').textContent=g.name;document.getElementById('dayText').textContent=g.desc;document.getElementById('dayIcon').textContent=g.icon;document.getElementById('dayTitle').scrollIntoView({behavior:'smooth',block:'center'})}
+document.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{document.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));c.classList.add('active');category=c.dataset.cat;renderGames()});
+renderStats();renderAchievements();renderGames();
+const day=games[new Date().getDate()%games.length];document.getElementById('dayTitle').textContent=day.name;document.getElementById('dayText').textContent=day.desc;document.getElementById('dayIcon').textContent=day.icon;
+</script>
+</body>
+</html>
